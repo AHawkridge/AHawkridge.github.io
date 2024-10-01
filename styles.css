@@ -41,8 +41,50 @@ body.light-theme {
 }
 
 
+@media (max-width: 1000px) { /* This shoudnt work the way it does but works */
+    .container {
+        width: 100%; 
+        padding: 1rem;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .content{
+        flex-direction: column;
+        width: 330%;
+    }
+
+    section.content div {
+        width: 30%;
+    }
+    
+    img {
+        width: 100%; 
+    }
+}
 
 
+
+.container {
+    width: 66%;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+}
+
+section.content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem; /* horizontal line  border-top: 1px solid var(--text-color)*/
+    
+}
+
+section.content div {
+    width: 30%;
+}
 
 body {
     font-family: 'Arial', sans-serif;
@@ -50,7 +92,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin-bottom: 5rem;
-
+    
 }
 
 .main-header {
@@ -66,12 +108,6 @@ body {
 }
 
 
-.container {
-    width: 50%;
-    margin: 0 auto;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
 
 
 
@@ -111,16 +147,6 @@ p {
 
 
 
-section.content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem; /* horizontal line  border-top: 1px solid var(--text-color)*/
-    
-}
-
-section.content div {
-    width: 30%;
-}
 
 h2 {
     font-size: 1.5rem;
@@ -217,7 +243,7 @@ footer {
 .footer-container {
     display: flex;
     justify-content: space-between;
-    width: 50%; /* Make the container span the full width */
+    width: 66%; /* Make the container span the full width */
     margin: 0 auto; /* Center the container */
 }
 
