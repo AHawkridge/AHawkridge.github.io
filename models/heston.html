@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heston Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+    <a href="../index.html"> Home </a>
+
+    <div class="container">
+    <h1 class="fade-up">Heston</h1>
+    <p class="subtitle">Volatility with a stochastic differential equation.</p>
+    
+
+    <div class="stock-vol">
+
+        <div>
+            <p class="img-title"> Stock path</p>
+            <img id="gifImage" src="../images/heston.gif" alt="Merton Jump Diffusion" class="mjd fade-up">
+        </div>
+        
+        <div>
+            <p class="img-title">Volatility Path</p>
+            <img id="gifImage" src="../images/heston_sig.gif" alt="Merton Jump Diffusion" class="mjd fade-up">
+        </div>
+        
+    </div>
+
+    <p>
+
+        The Heston model proposed the concept of stochastic volatility,
+        where the volatility itself is has its own separate stochastic differential equation.
+        This concept was proposed first introduced in 1987 by J.Hull and A.White \cite{HULL1987}. 
+        Then E.Stein and J.Stein managed to generalise the Black-Scholes model to allow for stochastic 
+        volatility in 1991 \cite{stein1991stock}, and then further developed by S.Heston in 1993 \cite{heston1993closed} 
+        who the modelled is named after. These papers discuss the development of the stochastic differential equation of the 
+        volatility where there needs to be a correlation between the wiener process in the volatility SDE and the GBM, the correlation
+        value that was determined was $p=0.6$, although in some later revisions this value can change. In the Heston model the volatility 
+        follows an Ornstein-Uhlenbeck process:
+        
+        \[ dS_t = \mu S_t dt + \sigma_t S_t dW_t^S \]
+        
+        \[ d\sigma_t = -\theta \sigma dt + \delta dW_t^\sigma \]
+        
+        
+        Then through the use of Ito's lemma the variance ($v$) is given by:
+        
+        \[ dv_t = \kappa (\theta -v_t)dt + \xi \sigma dW_t^\sigma \]
+        
+        A multivariate normal distribution is used here , to ensure there is correlation between the Weiner processes.
+        $\theta$ is the long term variance of the SDE, it is the value at which the variance is expected to tend towards
+        as $t \rightarrow \infty$, $\kappa$ is the rate at which the variance tends to $\theta$ and lastly $\xi$ is the
+        volatility of the volatility SDE which determines the variance. It can be seen that the Heston model uses the 
+        variance rather than the volatility, this is because the volatility can become negative in the above SDE and 
+        as such the value is squared to only deal with positive values.
+    </p>
+        
+        
+        
+        
+        
+</body>
+<footer class="fade-up">
+    <div class="footer-container">
+        <p class="footer-text">Made by me, for me, for fun :)</p>
+        <p class="footer-icon">
+        <a href="https://github.com/AHawkridge"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ahawkridge/"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:a.hawkridge@hotmail.com" class="icon-link"><i class="fas fa-envelope"></i></a>
+        </p>
+</footer>
+</html>

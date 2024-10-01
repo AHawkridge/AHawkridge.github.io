@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTMC</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+    <a href="../index.html"> Home </a>
+
+    <div class="container">
+    <h1 class="fade-up">Optimizing Loan Offer Acceptance Through Machine Learning Models</h1>
+    <p class="subtitle">A Comparative Study of Classification Techniques for Predicting Personal Loan Uptake</p>
+
+    <div >
+        <img  src="../images/classificiation/ROC.png" alt="Merton Jump Diffusion" class="styled-image fade-up">
+    </div>
+
+
+    <p>The data set analysed in this report contains information of 5000 customers, including their demographics,
+        financial status, and banking behaviors. The objective is to predict whether a customer would accept a
+        personal loan offered by the bank, with the aim of identifying potential candidates for upselling personal
+        banking loans.
+        After exploring various different classification models, the model best suited to the task was the Extreme
+        Gradient Boosting Classification Learner (xgboost). To explain this model we will first need to discuss
+        decision trees. Decision trees mimic real trees in the sense that you start the base of the tree, the tree
+        then splits into branches based on different choices, with each branch leading to another decision (which
+        would create another smaller branch) or, ultimately, a prediction. These decisions continue until the tree
+        reaches a point where it can’t split anymore, either because it’s reached a maximum depth or there aren’t
+        enough data points left. When a new data point is presented to the decision tree, it follows the branches
+        in the tree to reach a final prediction. Extreme gradient boosting combines several of these trees, where
+        the next tree in the sequence tries to predict what the previous tree could not do. This model managed
+        to correctly identify whether or not a person can be upsold on their personal loan 98.1% of the time. The
+        model outperforms all the other models tested while still being computational quick.</p>
+
+
+
+        <h2> Random Forest </h2>
+
+        <p>
+            In the investigation of hyperparameters for random forests, an iterative process was employed to explore
+            the impact of varying the number of trees and the depth of the trees. The analysis revealed that as these
+            parameters were adjusted, both variables reached a point where further adjustments did not significantly
+            impact the performance metrics being evaluated. This plateau suggests that there is an optimal config-
+            uration for the number and depth of trees beyond which additional adjustments do not yield substantial
+            improvements in model performance. The chosen hyperparameters were 10 and 20 for tree depth and
+            number of trees respectively.
+        </p>
+
+        <div class="stock-vol">
+
+            <div>
+                <p class="img-title"> Tree depth against error</p>
+                <img  src="../images/classificiation/TreeDepth.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+            
+            <div>
+                <p class="img-title">Number of trees against error</p>
+                <img  src="../images/classificiation/Treenum.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+        </div>
+            
+        <h2>Extreme Gradient Boosting</h2>
+        <p>
+
+            Extreme Gradient Boosting builds a series of decision trees in order, where each new tree corrects the errors made by the previous ones.
+            It optimizes a loss function by adding new trees that minimize the residual errors. Extreme gradient boosting uses a gradient boosting framework,
+            which means it fits new models to the residuals of the previous models, allowing it to capture complex patterns in the data.
+            Likewise to the random forests an iterative process was used to explore the impact of maximum tree depth
+            and number of rounds for the gradient boosted method. The analysis showed that as the tree depth was
+            adjusted, there was a plateau in model performance, indicating that beyond a certain depth, increasing
+            tree complexity did not significantly improve predictive accuracy. On the other hand, the number of
+            boosting rounds showed a continuous decrease in performance, albeit with diminishing returns. This
+            suggests that increasing the number of rounds improves model performance, but the gains become less
+            significant as more rounds are added
+            
+        </p>
+        <div class="stock-vol">
+
+            <div>
+                <p class="img-title"> Tree depth against error</p>
+                <img  src="../images/classificiation/gboost_depth.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+            
+            <div>
+                <p class="img-title">Number of trees against error</p>
+                <img  src="../images/classificiation/gboost_rounds.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+        </div>
+
+        <h2>Neural Network</h2>
+        <p>
+            A variety of activation functions were tested on the neural network. 
+            Activation functions introduce non-linearity into the network, allowing 
+            neural networks to learn complex patterns and relationships in the data. 
+            Without activation functions, a neural network would essentially be a series
+            of linear transformations, making it limited in its ability to model non-linear
+            relationships. Through trial and error the sigmoid activation parameter was chosen
+            as it yielded the lowest classification error 
+        </p>
+
+        <p>
+
+            The neural network uses a dropout rate of 0.5 this means in the drop out layers half
+             of the neurons will be randomly removed from the model. This stops the model from having
+              too much reliance on a single neuron which forces the network to learn a more generalised 
+              and robust representation of the data and as a result obtaining a more accurate result.
+            
+              
+              The neural network could potentially achieve higher accuracy compared to the selected
+               gradient boosting method. However, optimizing its performance involves tuning numerous 
+               parameters, such as the size and number of hidden layers, activation functions, and dropout
+                rates. Optimising all these parameters would be not worth the time or the computational power 
+                required as would cost more than the potential increased accuracy would yield.
+              
+            </p>
+
+
+            <div>
+                <img src="../images/classificiation/NN_sigmoid.png" alt="Merton Jump Diffusion" class="nn fade-up">
+            </div>
+
+            <h2>Model Performance </h2>
+            <p>
+                In this dataset, false positive rates are of greater concern than false negative rates because of the increased
+                risk associated with assets if individuals are unable to pay back. A higher false positive rate means
+                mistakenly identifying individuals as low risk when they are actually high risk, leading to potential losses
+                for the lender. Upon examining the Receiver Operating Characteristic curve and Precision Recall Curves,
+                it is evident that, with the exception of logistic regression, all models exhibit similar performance. The
+                ROC curve illustrates the trade-off between true positive rate and false positive rate across different
+                classification thresholds. The similarity in performance across models suggests that they are all effective
+                at distinguishing between positive and negative instances in the dataset. However, logistic regression
+                stands out as having performed worse than the others.
+            </p>
+
+
+            <div class="stock-vol">
+
+                <div>
+                    <p class="img-title"> Tree depth against error</p>
+                    <img  src="../images/classificiation/ROC.png" alt="Merton Jump Diffusion" class="fade-up">
+                </div>
+                
+                <div>
+                    <p class="img-title">Number of trees against error</p>
+                    <img  src="../images/classificiation/PRecall.png" alt="Merton Jump Diffusion" class="fade-up">
+                </div>
+            </div>
+
+            <p>
+            Since the ROC and precision recall can tell us no further information about the false positive rate
+            and the false negative rate the results tables above need to be examined to determine which models
+            have the lowest values. It is seen that the Neural Network has the smallest values for false positive and
+            negative rates. The calibration curve shows the relationship between predicted probabilities generated
+            by a predictive model and the observed event frequencies. This helps assess the reliability of the model’s
+            predicted probabilities by comparing them to the actual outcomes. IN a best case scenario, the predicted
+            probabilities would closely match the observed event frequencies, resulting in a calibration curve that
+            closely follows the grey diagonal line. The distance from this diagonal line indicate areas where the model’s
+            predicted probabilities are either over confident or under confident, providing insights into potential model
+            calibration issues. Given this information it can be seen in the graph that all three models follow the
+            diagonal line fairly well, so there does not appear to any calibration issues, although it could be said that
+            the Xgboost seems a bit more sporadic than the other two.
+            </p>
+
+            <div>
+                <p class="img-title">Number of trees against error</p>
+                <img  src="../images/classificiation/cc.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+</div>    
+</body>
+
+<footer class="fade-up">
+    <div class="footer-container">
+        <p class="footer-text">Made by me, for me, for fun :)</p>
+        <p class="footer-icon">
+        <a href="https://github.com/AHawkridge"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ahawkridge/"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:a.hawkridge@hotmail.com" class="icon-link"><i class="fas fa-envelope"></i></a>
+        </p>
+</footer>
+</html>

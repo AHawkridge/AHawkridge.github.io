@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merton Jump Diffusion</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+    <a href="../index.html"> Home </a>
+
+    <div class="container">
+    <h1 class="fade-up">Merton Jump Diffusion</h1>
+    <p class="subtitle">Geometric Brownian Motion with a Compound Poisson Process</p>
+    
+
+    <div >
+        <img id="gifImage" src="../images/mjd_single.gif" alt="Merton Jump Diffusion" class="mjd fade-up">
+    </div>
+
+
+
+    <p class="fade-up">
+        One of the first models to capture the the volatility smile was the Merton Jump Diffusion model (MJD), it was first
+        introduced by R. Merton in the aim to extend the Black-Scholes model to remove some of its assumptions. The
+        model states that the underlying assets have occasional large discontinuous jumps in price while still following the
+        normal GBM. These large jumps are infrequently observed in the market, but would not be possible to model with just
+        GBM, Merton’s model integrates these jumps into the price dynamics of the underlying asset, providing a more complete
+        description of the underlying assets behavior. The following stochastic differential equation is proposed to describe these
+        asset price jumps:
+
+        \[ S_t = S_0 e^{(\mu - \frac{\sigma^2}{2} - \lambda k)t + \sigma W_t +\sum_{i=1}^{N_t} J_i} \]
+
+        The additional summation is the compound Poisson process, it is the result of all the jumps that occur over the stock
+        path. The additional λk term comes from the Poisson distribution and ensures that the drift rate is not effected by the
+        inclusion of jumps .
+
+    </p>
+
+    <p>For more information on this model please read the following papers:</p>
+
+    <p></p>
+    </div>
+</body>
+
+<footer class="fade-up">
+    <div class="footer-container">
+        <p class="footer-text">Made by me, for me, for fun :)</p>
+        <p class="footer-icon">
+        <a href="https://github.com/AHawkridge"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ahawkridge/"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:a.hawkridge@hotmail.com" class="icon-link"><i class="fas fa-envelope"></i></a>
+        </p>
+</footer>
+</html>

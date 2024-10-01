@@ -1,0 +1,308 @@
+:root {
+    /* --l-bg: #fbf1c7;*/
+    --l-bg: #fbf1c7;
+    --l-font: #282828;
+    --l-link: #2f2f2f;
+    --l-footer: #7c6f64;
+
+
+    --d-bg:#282828;
+    --d-font:#fbf1c7;
+    --d-link: #fff8de;
+    --d-footer: #3c3836;
+
+    --red: #cc241d;
+    --green: #98971a;
+    --yellow: #d79921;
+    --blue: #458588;
+    --purple:#b16286;
+    --aqua:#689d6a;
+    --gray: #7c6f64;
+    --orange: #d65d0e;
+    --bg-color: var(--d-bg);
+
+
+  }
+
+  body.dark-theme {
+    --bg-color: var(--d-bg);
+    --text-color: var(--d-font);
+    --link-color: var(--d-link);
+    --footer-color: var(--d-footer)
+}
+
+
+
+body.light-theme {
+    --bg-color: var(--l-bg);
+    --text-color: var(--l-font);
+    --link-color: var(--l-link);
+    --footer-color: var(--l-footer)
+}
+
+
+
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin-bottom: 5rem;
+
+}
+
+.main-header {
+    text-align: left;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--text-color); 
+}
+
+.subtitle{
+    font-style: italic;
+    color: var(--aqua)
+    
+}
+
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+
+h1 {
+    font-size: 2.5rem;
+    text-align: left;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+
+
+
+.link {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+
+.link:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+    font-size: 1.22rem;
+}
+
+
+
+
+
+
+
+section.content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem; /* horizontal line  border-top: 1px solid var(--text-color)*/
+    
+}
+
+section.content div {
+    width: 30%;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+}
+
+
+em {
+    font-style: italic;
+    color: var(--purple);
+}
+
+img {
+    animation-iteration-count: 1;
+}
+
+
+button {
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: var(--icon-dark-color); /* Moon is dark by default */
+    border: none; /* Remove the border */
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
+}
+
+
+button i {
+    color: var(--icon-dark-color); /* Use variable color for the icon */
+}
+
+body.dark-theme button i {
+    color: var(--icon-light-color); /* Use light color for moon in dark mode */
+}
+
+
+button:hover {
+    transform: scale(1.3);
+}
+
+
+img {
+    background-color: transparent;
+    display: block; /* This is optional, but can prevent margin collapse */
+    margin: 0 auto; /* Centers the image horizontally */
+    width: 100%;
+    height: auto;
+}
+
+
+.mjd {
+    width: 75%;
+    height: auto;
+}
+
+
+.img-title{
+font-weight: bold;
+text-align: center; 
+}
+
+
+.stock-vol{
+    display:flex;
+    justify-content: space-around; /* Adds space between the images */
+    align-items: center;
+
+
+}
+
+
+footer {
+    background-color: var(--footer-color);
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    width: 100%;    
+    height: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 50%; /* Make the container span the full width */
+    margin: 0 auto; /* Center the container */
+}
+
+.footer-text {
+    font-style: italic;
+    text-align: left;
+    line-height: 1;
+}
+
+.footer-icon {
+    text-align: right;
+    line-height: 1;
+}
+
+.footer-icon i {
+    margin: 0 15px; /* Space between icons */
+    scale: 1.8;
+}
+
+
+
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below original position */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+/* When this class is added, the element will fade in and move up */
+.fade-up-visible {
+    opacity: 1;
+    transform: translateY(0); /* Move to original position */
+}
+
+.btn {
+    display: inherit;
+    padding: 10px 20px;
+    background-color: var(--orange); /* Button color */
+    
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 1s ease; /* Smooth hover effect */
+  }
+  
+  .btn:hover {
+    background-color: var(--yellow); /* Darker color on hover */
+  }
+
+  .styled-image {
+    max-width: 100%; /* Ensures the image is responsive */
+    height: auto;
+    border: 5px solid var(--text-color); /* Adds a thin dark border */
+    /*box-shadow: 0 5px 8px var(--l-bg); /* Adds a shadow for depth */
+   
+    border-radius: 10px;
+    width: 75%;
+    height: auto;
+}
+
+.nn {
+    width: 75%;
+    height: auto;
+}
+
+
+
+.footer-link{
+    color: var(--text-color);
+    text-decoration: none;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.footer-link:hover{
+    transform: scale(1.2)
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Move down by 20px */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at original position */
+    }
+}

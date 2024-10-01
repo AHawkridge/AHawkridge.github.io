@@ -1,0 +1,21 @@
+            <p>Hi, I'm Alexander Hawkridge, a passionate data analyst and financial mathematician with a strong foundation in scientific computing and machine learning.
+                I hold an MSc in Scientific Computing & Data Analysis with Financial Mathematics from Durham University and a BSc in Physics from the University of Lincoln,
+                both achieving awards for academic performance. My academic and professional journey has focused on applying complex mathematical models to solve real-world challenges
+                in finance, healthcare, and beyond.</p>
+            <p>
+                With a deep understanding of stochastic calculus, volatility modeling, and data analytics, I've tackled diverse projects—from enhancing the
+                 Black-Scholes model for option pricing to simulating neural networks using the Hodgkin-Huxley equations. I'm proficient in Python, SQL, JavaScript,
+                  and other programming languages, allowing me to develop innovative solutions across different domains.
+            </p>
+            <p>
+                I thrive on working at the intersection of data science and mathematics, and I am always eager to learn and apply new technologies to improve
+                 decision-making and operational efficiency. Whether it's automating processes, optimizing models, or conducting deep analysis, 
+                 I aim to make an impact with everything I do.
+            </p>
+            <p>
+                Please take a look at some of the projects I have done:
+            </p>
+
+
+
+             </div><span basics-css-icon="" data-icon="arrow-up-right" style="color: var(--mono9); width: 16px; height: 16px;" role="img" aria-label="arrow-up-right icon"></span>
