@@ -41,21 +41,17 @@ body.light-theme {
 }
 
 
-@media (max-width: 1000px) { /* This shoudnt work the way it does but works */
+@media (max-width: 900px) { /* This shoudnt work the way it does but works */
     .container {
         width: 100%; 
         padding: 1rem;
-    }
-
-    .footer-container {
-        flex-direction: column;
     }
 
     .content{
         flex-direction: column;
         width: 330%;
     }
-
+    
     section.content div {
         width: 30%;
     }
@@ -63,7 +59,90 @@ body.light-theme {
     img {
         width: 100%; 
     }
+
+
+
+    .footer-container {
+        flex-direction: row; 
+        width: 100%; 
+        text-align: center;
+    }
+
+    .footer-text {
+        text-align: left;
+        
+    }
+
+    .footer-icon {
+        text-align: right; 
+    }
+
+
 }
+
+
+
+@media (max-width: 620px) {
+    .footer-container {
+        flex-direction: column; 
+        width: 100%; 
+        text-align: center;
+    }
+
+    p.footer-text {
+        display: none;
+
+        text-align: center;
+    }
+
+    .footer-icon {
+        text-align: center; 
+    }
+}
+
+
+
+
+footer {
+    background-color: var(--footer-color);
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    width: 100%;    
+    height: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 66%; 
+    margin: 0 auto; 
+    flex-wrap: wrap;
+}
+
+.footer-text {
+    display: block;
+    font-style: italic;
+    text-align: left;
+    line-height: 1;
+    flex: 1 1 auto;
+}
+
+.footer-icon {
+    text-align: center;
+    line-height: 1;
+    flex: 0 1 auto;
+}
+
+.footer-icon i {
+    margin: 0 15px; 
+    scale: 1.8;
+}
+
+
+
+
 
 
 
@@ -78,7 +157,7 @@ body.light-theme {
 section.content {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem; /* horizontal line  border-top: 1px solid var(--text-color)*/
+    margin-bottom: 1rem; 
     
 }
 
@@ -176,8 +255,8 @@ img {
 button {
     font-size: 1.2rem;
     background-color: transparent;
-    color: var(--icon-dark-color); /* Moon is dark by default */
-    border: none; /* Remove the border */
+    color: var(--icon-dark-color); 
+    border: none; 
     cursor: pointer;
     border-radius: 50%;
     width: 50px;
@@ -187,11 +266,11 @@ button {
 
 
 button i {
-    color: var(--icon-dark-color); /* Use variable color for the icon */
+    color: var(--icon-dark-color); 
 }
 
 body.dark-theme button i {
-    color: var(--icon-light-color); /* Use light color for moon in dark mode */
+    color: var(--icon-light-color); 
 }
 
 
@@ -223,80 +302,48 @@ text-align: center;
 
 .stock-vol{
     display:flex;
-    justify-content: space-around; /* Adds space between the images */
+    justify-content: space-around;
     align-items: center;
 
 
 }
 
 
-footer {
-    background-color: var(--footer-color);
-    position: fixed;
-    bottom: 0;
-    left: 0; 
-    right: 0;
-    width: 100%;    
-    height: auto;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    width: 66%; /* Make the container span the full width */
-    margin: 0 auto; /* Center the container */
-}
-
-.footer-text {
-    font-style: italic;
-    text-align: left;
-    line-height: 1;
-}
-
-.footer-icon {
-    text-align: right;
-    line-height: 1;
-}
-
-.footer-icon i {
-    margin: 0 15px; /* Space between icons */
-    scale: 1.8;
-}
 
 
 
 
 .fade-up {
     opacity: 0;
-    transform: translateY(20px); /* Start slightly below original position */
+    transform: translateY(20px); 
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
 /* When this class is added, the element will fade in and move up */
 .fade-up-visible {
     opacity: 1;
-    transform: translateY(0); /* Move to original position */
+    transform: translateY(0); 
 }
 
 .btn {
     display: inherit;
     padding: 10px 20px;
-    background-color: var(--orange); /* Button color */
+    background-color: var(--orange); 
     
     text-align: center;
     text-decoration: none;
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 1s ease; /* Smooth hover effect */
+    border-radius: 5px; 
+    transition: background-color 1s ease;
   }
   
   .btn:hover {
-    background-color: var(--yellow); /* Darker color on hover */
+    background-color: var(--yellow); 
   }
 
   .styled-image {
-    max-width: 100%; /* Ensures the image is responsive */
+    max-width: 100%; 
     height: auto;
-    border: 5px solid var(--text-color); /* Adds a thin dark border */
+    border: 5px solid var(--text-color); 
     /*box-shadow: 0 5px 8px var(--l-bg); /* Adds a shadow for depth */
    
     border-radius: 10px;
@@ -325,10 +372,10 @@ footer {
 @keyframes fadeUp {
     0% {
         opacity: 0;
-        transform: translateY(20px); /* Move down by 20px */
+        transform: translateY(20px); 
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* End at original position */
+        transform: translateY(0); 
     }
 }
