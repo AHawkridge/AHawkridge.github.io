@@ -12,7 +12,7 @@
 
 <body>
     <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
-    <a href="../index.html"> Home </a>
+    <a href="../index.html" class="link"> Home </a>
 
     <div class="container">
     <h1 class="fade-up">Heston</h1>
@@ -37,12 +37,12 @@
 
         The Heston model proposed the concept of stochastic volatility,
         where the volatility itself is has its own separate stochastic differential equation.
-        This concept was proposed first introduced in 1987 by J.Hull and A.White \cite{HULL1987}. 
+        This concept was proposed first introduced in 1987 by J.Hull and A.White. 
         Then E.Stein and J.Stein managed to generalise the Black-Scholes model to allow for stochastic 
-        volatility in 1991 \cite{stein1991stock}, and then further developed by S.Heston in 1993 \cite{heston1993closed} 
-        who the modelled is named after. These papers discuss the development of the stochastic differential equation of the 
+        volatility in 1991, and then further developed by S.Heston in 1993 
+        who the modelled is named after. These discuss the development of the stochastic differential equation of the 
         volatility where there needs to be a correlation between the wiener process in the volatility SDE and the GBM, the correlation
-        value that was determined was $p=0.6$, although in some later revisions this value can change. In the Heston model the volatility 
+        value that was determined was \(p=0.6\), although in some later revisions this value can change. In the Heston model the volatility 
         follows an Ornstein-Uhlenbeck process:
         
         \[ dS_t = \mu S_t dt + \sigma_t S_t dW_t^S \]
@@ -55,15 +55,46 @@
         \[ dv_t = \kappa (\theta -v_t)dt + \xi \sigma dW_t^\sigma \]
         
         A multivariate normal distribution is used here , to ensure there is correlation between the Weiner processes.
-        $\theta$ is the long term variance of the SDE, it is the value at which the variance is expected to tend towards
-        as $t \rightarrow \infty$, $\kappa$ is the rate at which the variance tends to $\theta$ and lastly $\xi$ is the
+        \(\theta\) is the long term variance of the SDE, it is the value at which the variance is expected to tend towards
+        as \(t \rightarrow \infty\), \(\kappa\) is the rate at which the variance tends to \(\theta\) and lastly \(\xi\) is the
         volatility of the volatility SDE which determines the variance. It can be seen that the Heston model uses the 
         variance rather than the volatility, this is because the volatility can become negative in the above SDE and 
         as such the value is squared to only deal with positive values.
     </p>
         
+    <h2>Implied Volatility</h2>
+
+    <div>
+        <img  src="../images/stoch_vol/HestonIV.png" alt="Merton Jump Diffusion" class="plot fade-up">
+    </div>
+    
+    <h2>Distribution of Log-Returns</h2>
+    <p>
+
+        The distribution of  log-returns under the Heston model are not as simple as the normal distribution in the Black-Scholes model. Due to the Heston models constant change in volatility, the normal distribution is not enough to capture the key characteristics of the model. Fortunately the Heston model has a characteristic function which describes the probability density although its derivation can be convoluted. A characteristic function describes the process of a random variable, and thus if the random variable exhibits a probability density function the characteristic function can provide and alternative path this probability density. This is especially useful in this circumstance as the two stochastic differential equations in the model make it difficult to calculate the probability density directly. The generalised formula for the characteristic function is 
+        
+        \begin{equation}
+        f_X (i \phi) = \mathbb{E}[e^{i\phi X}],
+        \end{equation}
+        where \(X\) is a random variable. The explicit solution to the characteristic function for the Heston model is as follows:
+        
+        \begin{align}
+        f(X_t,V_t,t;\phi) &= exp(C(\tau)+D(\tau)V_t +i \phi X_t) \label{eq:hestcf}\\
+        C(\tau;\phi) &= ri\phi \tau + \frac{k\theta}{\sigma^2}(-(p\sigma i \ phi -k - M)\tau -2ln(\frac{1-Ne^M\tau}{1-N}) \\
+        D(\tau;\phi) &= \frac{(e^{M\tau} -1)(p\sigma i \phi -k -M)}{\sigma^2(1-Ne^{M\tau})} \\
+        M&= \sqrt{(p \sigma i \phi - k)^2 + \sigma^2(i \phi +\phi^2)} \\
+        N &= \frac{p \sigma i \phi - k - M}{p \sigma i \phi - k - M}
+        \end{align}
+        where \(\tau =T-t\), \(\sigma\) is the volatility, \(k\) is the volatility of the volatility, \(p\) is the correlation between Wiener processes, \(r\) is the risk
+        free interest rate and \(\theta\) is the value of mean reversion.  
+
         
         
+    </p>
+
+    <div>
+        <img  src="../images/stoch_vol/GBM_Heston_Distribution.png" alt="Merton Jump Diffusion" class="plot fade-up">
+    </div>
         
         
 </body>

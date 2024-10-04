@@ -12,14 +12,14 @@
 
 <body>
     <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
-    <a href="../index.html"> Home </a>
+    <a href="../index.html" class="link"> Home </a>
 
     <div class="container">
     <h1 class="fade-up">Continous-Time Finite-State Markov Chain</h1>
-    <p class="subtitle">The volatility can take any finite number of states</p>
+    <p class="subtitle fade-up">The volatility can take any finite number of states</p>
     
 
-    <div class="stock-vol">
+    <div class="stock-vol fade-up">
 
         <div>
             <p class="img-title"> Stock path</p>
@@ -32,16 +32,214 @@
         </div>
         
     </div>
-    
-</body>
+    <div class="fade-up">
 
+        <p>
+            A continuous time Markov chain is a stochastic process comprising of states, in which the process will transition from one state to another,
+            where the time spent in each state before the transition and the determination of which state is next is dependant on an exponential random variable.
+            
+            The most fundamental part of the continuous time Markov chain is the transition rate matrix also known as the Q-Matrix. 
+            This matrix encapsulates all the information required to define the rates at which transitions occur between states.
+            It is a $n \times n$ matrix where $n$ represents the number of unique states the Markov chain can be in and is described
+            by the following conditions. 
+            \begin{equation}
+            0 \leq -q_{ii} < \infty \text{ for all } i
+            \end{equation}
+            \begin{equation}
+            q_{ij} \geq 0 \text{ for all } i \neq j
+            \end{equation}
+            \begin{equation}
+            \sum_{j} q_{ij} = 0 \text{ for all } i 
+            \end{equation}
+            Therefore in each row of the transition matrix the non-diagonal elements can be any non-negative finite number and as such the diagonal
+            elements of the matrix are the is the negative sum of the rest of the elements in that row, this ensures that the total sum of the row is
+            equal to zero. The below matrix is an example of a transition matrix and the transition rates can be more easily visuallised from the following
+            image
+        </p>
+        <p>
+            
+            \begin{equation*}
+            Q = \begin{bmatrix}
+            -8 & 6 & 2\\
+            3 & -4 & 1\\
+            2 & 4 & -6
+            
+            \end{bmatrix}
+            \end{equation*}
+            
+            
+        </div>
+</p>
+<div>
+    <img  src="../images/ctmc_tri.png" alt="Merton Jump Diffusion" class="ctmc_tri fade-up">
+</div>
+
+<p>
+The non-diagonal elements in this matrix determine how long the Markov process will stay in that state.
+The diagonal elements of the matrix determine which state the chain will go to next. All elements of the
+matrix use the exponential distribution to determine the events of switching and where to switch to.
+The concept of competing exponentials is vital in the transition dynamics of the Markov chain, when the
+chain is in state A and has been long enough that it has the opportunity to switch, it may have to chose 
+between many differing states. To do so, each new state has an an exponential distribution associated with it,
+then the new state with the smallest value is the next state the chain will go to. Using the above matrix as
+an example, if the chain is in state 1 it will stay in state one for \( Exp(\frac{1}{8}) \), once this waiting
+time is met it will change to either state 2 or state 3 depending on which exponential distribution is smaller,
+\( Exp(\frac{1}{6}) \) for state 2 and \( Exp(\frac{1}{2}) \) for state 3. As such, one way to overcome the volatility
+smile deficiency is through the use of Continuous Time Markov Chains, where it is assumed that volatility of
+the market can take a finite set of states each with their own set of parameters
+</p>
+
+<h2>The exponential distribution</h2>
+<p>
+
+    The exponential distribution is crucial in the continuous time Markov chain due to the few properties,
+    the first being the memoryless property which is described by the following equation:
+    
+    \begin{equation}
+    P(T>s+t|T>s) = P(T>t) \text{ for all } t,s \geq 0
+    \end{equation}
+    where \(T \) is the waiting time for an event and \(s \) is known as the initial time. This equation can be interpreted as so,
+    if an event has not occurred after 10 seconds the conditional probability of that event occurring in the next 5 seconds is equal
+    to the unconditional probability of the event occurring in the next 5 seconds after the initial time (i.e the probability of an 
+    event occurring in the future is independent of any prior knowledge, given that the event has not occurred already). This is vital 
+    for Markov processes as the future state that the chain will change to is only dependant on the current state and not any states that
+    it may have been in previously. Furthermore, this property is only found in the exponential distribution and the geometric distribution
+    but there are more properties to the exponential distribution that make it useful in the Markov process. The second property is that
+    the exponential distribution naturally describes the time between events in a Poisson process, which is frequently used to model random 
+    occurrences since it can describe the average time between events but the exact time is not known due to randomness.
+    The Black-Scholes model then can be rewritten with the following changing states according to continuous time Markov chains.
+    \begin{equation}
+    dB_t = r B_t dt 
+    \end{equation}
+    \begin{equation}
+    dS_t = \mu S_t dt + \sigma_{\eta_t} S_{t} dW_t,
+    \end{equation}
+    where \(B_t\) is the bond price at time \(t\), \(r\) is the risk-free interest rate, \(\mu\) is the drift amount
+    (\(r\) under the risk neutral measure), \(S_t\) is the stock price at time \(t\), \(\sigma_{\eta_t}\) is the 
+    volatility in state \(\eta\) at time \(t\) and \(W_t\) is a Weiner process.
+    
+    The geometric brownian motion can then be modelled with Continous-time markov 
+    states (GBMWS) to allow the volatility to switch to random states, it is found that two
+    states are sufficient in describing the market however more states can be implemented with relative ease if the model requires.
+</p>
+
+
+
+<h2>Implied Volatility</h2>
+
+<p>
+    The first step to finding a volatility smile is to find an appropriate transition matrix for a two state system and two values for the volatility in this system.
+    Through experimentation it is found that a high range between the volatilities genereates a more defined curve and as such teh values chosen are [0.1,1] for the two
+    state system. These values are unlikley to replicate the real market however currently as part of my further research, I am developing an algorithm that can obtain values for the 
+    transition matrix and volatilities obtained from real data. The transition matrix below is used, as the rate of state switching is neither too frequent or infrequent, both of 
+    which would make the volatility smile flatter.
+</p>
+
+\begin{equation}
+Q = \begin{bmatrix}
+        -2 & 2 \\
+        4 & -4      
+\end{bmatrix}
+\end{equation}
+
+<p>
+    In this matrix the volatility will spend two thirds of its time in state 1 (0.1) and one third of its time in state 2 (1), this change in volatility is what helps create
+    an implied volatility smile.
+</p>
+    
+
+<div>
+    <img  src="../images/stoch_vol/BSWSIV.png" alt="Merton Jump Diffusion" class="plot fade-up">
+</div>
+
+<p> The simulations
+    all start with the volatility being in state 1, so in this case σ = 0.1, this important to consider as the state in which it
+    model starts in is the state in which more time will be spent, by starting in the lower volatility state a more defined smile
+    can be achieve.
+</p>
+
+
+<p>
+It is possible to generate a volatilty smile with more states, in fact it may be necessary for certain markets may require it, however would create unneccessary complexity
+in this instance.
+</p>
+
+<h2>
+    Pricing
+</h2>
+
+<p>After confirming that this model is an accurate and reliable way to represent the real market, creating a pricing
+    model is the next intuitive step. A closed form solution for pricing a two state system has been developed by C.Fuh et al.
+    
+    \begin{equation}
+    V(T,K,r) = E^Q[e^{-rT}(S_T -K)^+|\epsilon(0)=i]
+\end{equation}
+\begin{equation}
+     V(T,K,r)= e^{-rT}\int_{0}^{\infty} \int_{0}^{T} \frac{y}{y+K} \phi(\ln(y+K),m(t),v(t))f_i(t,T)dtdy
+\end{equation}
+\begin{equation}
+    m(t)=\ln(S_0) + (rT-\frac{1}{2}v(t))
+\end{equation}
+\begin{equation}
+    v(t)= (\sigma_{0}^2 - \sigma_{1}^2)t + \sigma_{1}^2T
+\end{equation}
+\begin{equation}
+    f_0(t,T) = e^{-\lambda_0T}\delta_0(T-t)+e^{-\lambda_1(T-t)-\lambda_0t}[\lambda_0I_0(2(\lambda_0\lambda_1t(T-t))^\frac{1}{2} + \left( \frac{\lambda_0\lambda_1}{T-t}\right)^\frac{1}{2} I_1(2(\lambda_0\lambda_1t(T-t))^\frac{1}{2})]
+\end{equation}
+
+Where \( \lambda_0,\lambda_1 \) are the absolute of the diagonal elements of the transition rate matrix,
+ \( \delta_0 \) is the dirac delta function at 0, and \(I_0\) and \(I_1\) are the modified Bessel function of orders 1 and 2
+\begin{equation}
+    I_a(z)=\left(\frac{z}{2}\right)^a \sum_{k=0}^\infty \frac{(z/2)^{2k}}{k!\Gamma(K+a+1)}
+\end{equation}
+    
+    For an easy comparison the parameters used to generate the pricing volatility smile are the same
+    used in the Monte-Carlo method.
+
+</p>
+
+
+<div>
+    <img  src="../images/stoch_vol/PricingIVBSWS.png" alt="Merton Jump Diffusion" class="plot fade-up">
+</div>
+
+<p>
+    It can be seen that the Monte-Carlo simulation of the volatility smile and the deterministic simulation exhibit a similar shape however the Monte-Carlo approach
+    has slightly smaller values for the volatility. One of the causes for this disparity between implied
+    volatility values is the stochastic nature of the Monte-Carlo methods used to derive the implied volatility values, as such
+    the accuracy achievable will not be as precise as the deterministic pricing implied volatility.</p>
+
+
+<h2>Distribution of Log-Returns</h2>
+
+<p>The stationary distribution provides us with the expected proportion of time spent in each state as t becomes arbitrarily
+    large and in turn the number of times the chain switches also becomes arbitrarily large. In our case it can be interpreted
+    as so, given enough time it is expected that the chain would spend one third of the time in state 1 and two thirds of the
+    time in state 2. Therefore to simulate the stock price when it has reached the stationary distribution the state in which the
+    simulations start will be randomly chosen with weights two thirds for state 1 and one third for state 2, likewise to ensure
+    that there is enough time such that the time spent in each state is approximately equal to the stationary distribution the T
+    values was increased to T = 100. Originally it was thought that there would be two distinct normal distributions for each
+    of the volatilities, however it was found that this is not the case. Instead it is a single distribution where the mean and the
+    variance have the weighted averages of the stationary distribution.
+</p>
+
+
+<div>
+    <img  src="../images/stoch_vol/GBM_WSDistribution.png" alt="Merton Jump Diffusion" class="plot fade-up">
+</div>
+
+
+
+</div>
+
+</body>
 <footer class="fade-up">
     <div class="footer-container">
         <p class="footer-text">Made by me, for me, for fun :)</p>
         <p class="footer-icon">
-        <a href="https://github.com/AHawkridge" class="footer-link"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/ahawkridge/" class="footer-link"><i class="fab fa-linkedin"></i></a>
-        <a href="mailto:a.hawkridge@hotmail.com" class="footer-link"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/AHawkridge" class="footer-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ahawkridge/" class="footer-link"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:a.hawkridge@hotmail.com" class="footer-link"><i class="fas fa-envelope"></i></a>
         </p>
 </footer>
 </html>

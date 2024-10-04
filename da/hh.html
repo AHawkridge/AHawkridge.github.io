@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTMC</title>
+    <title>Hodgkin-Huxley</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../scripts.js" defer></script>
@@ -12,7 +12,7 @@
 
 <body>
     <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
-    <a href="../index.html"> Home </a>
+    <a href="../index.html" class="link"> Home </a>
 
     <div class="container">
     <h1 class="fade-up">Modelling Brain Waves</h1>
@@ -27,7 +27,71 @@
         </div>
         
 
-</body>
+        <p>
+            The Hodgkin-Huxley model revolutionized our understanding of neurons by mathematically modeling the generation
+             and propagation of action potentials. Developed by Alan Hodgkin and Andrew Huxley in the 1950s, the model represents
+              a neuron as an electrical circuit with ion channels acting as variable resistors. These ion channels, specifically
+               for potassium (K+) and sodium (Na+), are key to the electrical activity in neurons.
+        </p>
+
+        <div class="stock-vol fade-up">
+
+            <div>
+                <p class="img-title"> Potassium Conductance</p>
+                <img  src="../images/hh/K_conductance.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+            
+            <div>
+                <p class="img-title">Sodium Conductance</p>
+                <img  src="../images/hh/Na_conductance.png" alt="Merton Jump Diffusion" class="fade-up">
+            </div>
+            
+        </div>
+
+        <h2>Key Concepts</h2>
+
+        <ol>
+            <li>Neuron Function: Neurons transmit signals using electrical impulses, largely driven by the movement of ions across their membranes. This process is modeled using differential equations that describe changes in voltage over time.</li>
+            <li>Action Potentials: When a neuron is stimulated, a rapid change in voltage (depolarization) occurs due to the influx of Na+ ions, followed by repolarization through the efflux of K+ ions. This electrical impulse travels along the neuron, transmitting information</li>
+            <li>Voltage Clamp Experiments: Hodgkin and Huxley’s experiments with voltage clamps helped them quantify the ion currents and derive the conductances of sodium and potassium ions, forming the basis of their mathematical model.</li>
+        </ol>
+
+        <p>
+            This work involved implementing and exploring the Hodgkin-Huxley model to simulate the electrical activity of neurons. 
+            The project began by studying the mechanisms by which neurons generate and propagate action potentials, focusing on the 
+            role of sodium and potassium ion channels in regulating ion flow across the membrane. These biological processes were then
+             translated into the mathematical framework established by Hodgkin and Huxley, whose differential equations describe how the 
+             conductance of these ions varies with changes in voltage. 
+        </p>
+
+        <p>
+            Numerical simulations were developed using Python to solve the Hodgkin-Huxley equations. The Runge-Kutta method was applied
+            to model the sodium and potassium conductances over time. This approach allowed for visualizing the behavior of these ion 
+            channels under different voltage conditions, demonstrating how action potentials are generated and propagated within a single neuron. 
+            The simulations provided insight into the electrical dynamics of neuron signaling.
+        </p>
+
+        <p>
+            In addition to modeling single neurons, the study extended the Hodgkin-Huxley model to simulate signal propagation across
+             neural networks. Using the NEURON simulation environment, action potentials were propagated through a series of connected neurons,
+              illustrating the process of synaptic transmission with time delays between each neuron in the chain. This demonstrated how electrical
+               signals are communicated between neurons in a network.
+        </p>
+
+        <div>
+            <img  src="../images/hh/network.png" alt="Merton Jump Diffusion" class="plot fade-up">
+        </div>
+
+        <p>Further analysis included the FitzHugh-Nagumo model, a simplified version of the Hodgkin-Huxley model. 
+            This alternative model, with fewer computational demands, was used to compare the efficiency and performance 
+            of different approaches, particularly when modeling larger neural networks. The limitations of the Hodgkin-Huxley 
+            model were also examined, such as its reliance on data from squid neurons and its deviation from the "All-or-None" 
+            principle, while discussing potential extensions to the model to accommodate more complex neuronal behavior.
+        </p>
+
+        <em>Github link: <a class="link" href="https://github.com/AHawkridge/Hodgkin_Huxley_Brain_Functions">https://github.com/AHawkridge/Hodgkin_Huxley_Brain_Functions</a> </em>
+
+    </body>
 
 <footer class="fade-up">
     <div class="footer-container">

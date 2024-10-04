@@ -12,11 +12,11 @@
 
 <body>
     <button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
-    <a href="../index.html"> Home </a>
+    <a href="../index.html" class="link"> Home </a>
 
     <div class="container">
     <h1 class="fade-up">Merton Jump Diffusion</h1>
-    <p class="subtitle">Geometric Brownian Motion with a Compound Poisson Process</p>
+    <p class="subtitle fade-up">Geometric Brownian Motion with a Compound Poisson Process</p>
     
 
     <div >
@@ -38,14 +38,79 @@
 
         The additional summation is the compound Poisson process, it is the result of all the jumps that occur over the stock
         path. The additional λk term comes from the Poisson distribution and ensures that the drift rate is not effected by the
-        inclusion of jumps .
+        inclusion of jumps.
 
     </p>
 
-    <p>For more information on this model please read the following papers:</p>
 
-    <p></p>
+    <h2>Implied Volatility</h2>
+    <p>
+        One of the defeciencies of the Black-Scholes model is that it assumes a constant volatility from geometric brownian motion, this mean it cannot capture real
+        financial markets as a parabolic shape is often observed known as the volatility smile. Through the implementation of the compound poisson process the volatility
+        is no longer a constant as the jumps act as moments of high volatility in the stock, therefore a smile is achievable as seen in plot below:
+    </p>
+    <div>
+        <img  src="../images/MertonJumpIV.png" alt="Merton Jump Diffusion" class="plot fade-up">
     </div>
+
+    <p>
+        This model is unique in that the volatilty of the Geometric brownian motion still remains constant however its effective volatility is variable.
+    </p>
+
+
+    
+    <h2>Distribution of Log-Returns</h2>
+    <p>
+        The MJD model behaves identically to the Black-Scholes model if no jump occurs in the given time. If a jump does
+        occur, it will still follow the same GBM after the discontinuous jump and as such, the distribution is expected to follow a
+        similar pattern the that of the Black-Scholes model except with the exception of larger tails due to the jumps increasing
+        the likelihood of extreme stock values. Furthermore, if there is equal probability that the jump will cause the stock price
+        to increase or decrease, that is m = 0, the distribution will exhibit no skew, however to generate the volatility smile for
+        this model there is a higher probability that the stock price will jump upwards, m = 0.3, yielding a positive skew when
+        compared to the normal distribution. 
+
+        To generate this distribution the Poisson distribution from the jumps and the normal distribution from the GBM have 
+        to be combined as seen in the following:
+\begin{equation}
+    N \sim \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+\end{equation}
+\begin{equation}
+    Pois \sim \frac{ (\lambda T)^k e^{-\lambda T}}{k!}
+\end{equation}
+\begin{equation}
+    f_k(x) = \frac{(\lambda T)^k e^{-\lambda T}}{k!} \frac{1}{\sigma \sigma_J \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu T - \mu_J k}{\sigma})^2}
+\end{equation}
+where the subscripts \(J\) differentiates between the jump and GBM means and volatilites. The probability 
+density function is then meant to be obtained through summing over all possible value for \(k\)
+\begin{equation}
+    f(x) = \sum_{k=0}^{\infty}f_k(x),
+\end{equation}
+ 
+However in the calculations \(k\) is summed up to 20 to truncate the infinite sum, this is done to ease the computational intensity
+ and yield a good approximation and will have little effect of the resulting probability distribution. It can be seen that the distribution
+  deviates greatly from the normal distribution and has an increased mean and positive skew, this is to be expected as there a single jump on 
+  average per stock path although the size of the jump can vary,and it is more likely to jump upwards, creating this increased mean and skew.
+
+
+    </p>
+
+    <div>
+        <img  src="../images/stoch_vol/GBM_MJDDistribution.png" alt="Merton Jump Diffusion" class="plot fade-up">
+    </div>
+
+    
+    <h2>References:</h2>
+    <ol>
+        <li>
+            R. C. Merton. Option pricing when underlying stock returns are discontinuous. Journal of Financial Economics, 3(1–2):125–144, Jan. 1976. 
+            <a href="https://doi.org/10.1016/0304-405X(76)90022-2" class="footer-link">https://doi.org/10.1016/0304-405X(76)90022-2</a>
+        </li>
+    </ol>
+    
+    
+    
+    
+</div>
 </body>
 
 <footer class="fade-up">
