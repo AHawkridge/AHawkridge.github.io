@@ -28,7 +28,7 @@
     --bg-color: var(--d-bg);
     --text-color: var(--d-font);
     --link-color: var(--d-link);
-    --footer-color: var(--d-footer)
+    --footer-color: var(--d-footer);
 }
 
 
@@ -37,23 +37,23 @@ body.light-theme {
     --bg-color: var(--l-bg);
     --text-color: var(--l-font);
     --link-color: var(--l-link);
-    --footer-color: var(--l-footer)
+    --footer-color: var(--l-footer);
 }
 
 
-@media (max-width: 900px) { /* This shoudnt work the way it does but works */
+@media (max-width: 1000px) { /* This shoudnt work the way it does but works */
     .container {
         width: 100%; 
         padding: 1rem;
     }
 
-    .content{
+    section.content{
+        width: 100%;
         flex-direction: column;
-        width: 330%;
     }
     
     section.content div {
-        width: 30%;
+        width: 100%;
     }
     
     img {
@@ -62,27 +62,6 @@ body.light-theme {
 
 
 
-    .footer-container {
-        flex-direction: row; 
-        width: 100%; 
-        text-align: center;
-    }
-
-    .footer-text {
-        text-align: left;
-        
-    }
-
-    .footer-icon {
-        text-align: right; 
-    }
-
-
-}
-
-
-
-@media (max-width: 620px) {
     .footer-container {
         flex-direction: column; 
         width: 100%; 
@@ -98,7 +77,11 @@ body.light-theme {
     .footer-icon {
         text-align: center; 
     }
+
 }
+
+
+
 
 
 
@@ -147,7 +130,8 @@ footer {
 
 
 .container {
-    width: 66%;
+    max-width: 66%;
+    width: 100%;
     margin: 0 auto;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -162,7 +146,7 @@ section.content {
 }
 
 section.content div {
-    width: 30%;
+    width: 100%;
 }
 
 body {
@@ -182,12 +166,20 @@ body {
 
 .subtitle{
     font-style: italic;
-    color: var(--aqua)
-    
+    color: var(--aqua);
+    display: flex;
+    justify-content: space-between;
 }
 
+.gh-link{
+    color: var(--aqua);
+    margin-left: auto;
+    text-decoration: none;
+}
 
-
+.gh-link:hover {
+    text-decoration: underline;  /* Add underline effect on hover if desired */
+}
 
 
 h1 {
@@ -201,6 +193,7 @@ p {
     font-size: 1.2rem;
     line-height: 1.5;
 }
+
 
 
 
@@ -295,6 +288,10 @@ img {
     height: auto;
 }
 
+.me-image {
+    width: 100%;
+    height: auto;
+}
 
 .mjd {
     width: 60%;
@@ -383,11 +380,11 @@ border-radius: 10px;
     color: var(--text-color);
     text-decoration: none;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .footer-link:hover{
-    transform: scale(1.2)
+    color: var(--yellow);
 }
 
 @keyframes fadeUp {
